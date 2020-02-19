@@ -22,6 +22,10 @@ Time Features:
 Additional Features:
 
     Full 2D Vector Class
+    Font Class
+    Seven Segment Display Class
     Sprite Class
     Drawing Class
+    Bitmask Class
+    Bit Map Class
 
