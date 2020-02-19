@@ -2,9 +2,6 @@
 
 # Classic Console Engine by digits version 1.03.2020.2
 
-from ssd import SevenSegmentDisplay
-
-from font import *
 from display import *
 from event import Event, Keys
 from timer import Timer, Clock
