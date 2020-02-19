@@ -1,5 +1,26 @@
 #!/usr/bin/python3
 
+def coords_to_index(x, y, w, h):
+    i = (y * w) + x
+    return i
+
+def vector_to_index(v, w, h):
+    i = (v.y * w) + v.x
+    return i
+
+def index_to_vector(i, w, h):
+    x = w % i
+    y = w / i
+    return Vector2(x, y)
+
+def index_to_coords(i, w, h):
+    x = 0
+    y = 0
+    if i > 0:
+        x = w % i
+        y = w / i
+    return x, y
+
 class Vector2:
 
     def __init__(self, x, y):

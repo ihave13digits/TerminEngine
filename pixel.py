@@ -1,5 +1,5 @@
-from vector import *
-from color import *
+from vector import Vector2
+from color import Color
 
 class Pixel:
 

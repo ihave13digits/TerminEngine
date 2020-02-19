@@ -1,5 +1,5 @@
 from os import O_NONBLOCK, system
-from sys import stdin, exit
+from sys import stdin
 from termios import tcgetattr, ICANON, TCSANOW, ECHO, TCSAFLUSH, tcsetattr
 from fcntl import fcntl, F_SETFL, F_GETFL
 
@@ -17,22 +17,10 @@ class Keys:
     ENTER: str = "\n"
     TAB: str = "\t"
     SPACE_BAR: str = " "
-
-
-class InputMap:
-
-    def __init__(self):
-        self.K = Keys()
-
-        self.up = "w"
-        self.down = "s"
-        self.left = "a"
-        self.right = "d"
-
-
+    F1: str = "\x1bOP"
+    F2: str = "\x1bOQ"
 
 ##-- Grabs Key --##
-
 
 class Event():
 
@@ -40,7 +28,7 @@ class Event():
         txt = input()
         return txt
 
-    def get_key(f=str):
+    def get_char(f=str):
         # Linux support only
         system("stty raw -echo")
         c = stdin.read(1)

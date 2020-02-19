@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 
-# Classic Console Engine by digits version 1.0.2019.12
+# Classic Console Engine by digits version 1.03.2020.2
 
-import random
+from ssd import SevenSegmentDisplay
 
+from font import *
 from display import *
-from event import *
-from timer import *
+from event import Event, Keys
+from timer import Timer, Clock
 
 class Engine:
 
@@ -14,12 +15,12 @@ class Engine:
         self.running = True
         self.paused = False
         self.is_typing = False
-        self.display = Display(12, 12)
+        self.display = Display(32, 32)
         self.palette = Palette()
         self.clock = Clock()
-        self.clock.set_fps(60)
+        self.clock.set_fps(10)
         self.sprites = []
-        self.action_limit = 0
+        self.action_limit = 10
         self.action_queue = []
         self.debug_text = ""
         self.title = "Press 'Esc' to quit."
@@ -31,6 +32,10 @@ class Engine:
         actn = self.action_queue[0]
 
         ### Add Key Events Here ###
+        if actn == "i":
+            self.display.get_console_info()
+        if actn == "r":
+            self.clock = Clock()
         if actn == "x":
             if self.paused == False:
                 self.paused = True
@@ -47,7 +52,7 @@ class Engine:
     def event(self):
         # Get Key Press
         if self.is_typing == False:
-            sel = Event.keypress()#get_key(f=str)
+            sel = Event.keypress()
         if self.is_typing == True:
             self.is_typing = False
             sel = input(": ")
@@ -63,13 +68,21 @@ class Engine:
         self.run()
 
     def update(self):
-        self.debug_text = '"{}"\nDisplay({}, {}) FPS({})'.format(self.title, self.display.width, self.display.height, self.clock.fps)
+        self.debug_text = 'Title({})Display({}, {}) FPS({:.1f}) Elapsed({:.1f}) Actions({})'.format(
+                self.title,
+                self.display.width,
+                self.display.height,
+                self.clock.fps,
+                self.clock.elapsed,
+                self.action_queue)
         self.clock.tick()
-        self.display.new_display()
+        self.display.refresh()
+        
+        size = self.display.get_console_size()
+        self.display.set_console_size(size.x, size.y)
         
         # Draw Here
         self.draw_sprites
-
         # Game Frame
         self.display.render()
 

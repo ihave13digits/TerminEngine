@@ -1,4 +1,4 @@
-import time
+from time import time, sleep
 
 class Timer:
 
@@ -12,20 +12,20 @@ class Timer:
         self.timeout = t
 
     def start(self):
-        self.start_time = time.time()
+        self.start_time = time()
 
     def stop(self):
-        self.stop_time = time.time()
+        self.stop_time = time()
 
 class Clock:
 
     def __init__(self):
-        self.start_time = time.time()
+        self.start_time = time()
         self.delta = float()
         self.target_fps = 30
         self.fps = 0
         self.timer = Timer()
-        self.wall_time = time.time()
+        self.wall_time = time()
         self.elapsed = self.get_elapsed()
         
         self.set_fps(self.target_fps)
@@ -37,15 +37,15 @@ class Clock:
         return self.fps
 
     def wall_time(self):
-        self.wall_time = time.time()
+        self.wall_time = time()
         return self.wall_time
 
     def get_elapsed(self):
-        return time.time() - self.start_time
+        return time() - self.start_time
     
     def tick(self):
-        while (self.wall_time + self.target_fps) > time.time():
-            pass
-        self.fps = 1 / (time.time() - self.wall_time)
-        self.wall_time = time.time()
+        while (self.wall_time + self.target_fps) > time():
+            sleep(0.0000000000001)
+        self.fps = 1 / (time() - self.wall_time)
+        self.wall_time = time()
         self.elapsed = self.get_elapsed()
