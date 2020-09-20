@@ -22,7 +22,7 @@ class Clock:
     def __init__(self):
         self.start_time = time()
         self.delta = float()
-        self.target_fps = 30
+        self.target_fps = 60
         self.fps = 0
         self.timer = Timer()
         self.wall_time = time()

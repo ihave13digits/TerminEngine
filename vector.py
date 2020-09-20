@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 def coords_to_index(x, y, w, h):
     i = (y * w) + x
     return i

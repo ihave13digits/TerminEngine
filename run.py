@@ -2,9 +2,6 @@
 
 # Classic Console Engine by digits version 1.03.2020.2
 
-from ssd import SevenSegmentDisplay
-
-from font import *
 from display import *
 from event import Event, Keys
 from timer import Timer, Clock
@@ -68,23 +65,23 @@ class Engine:
         self.run()
 
     def update(self):
-        self.debug_text = 'Title({})Display({}, {}) FPS({:.1f}) Elapsed({:.1f}) Actions({})'.format(
-                self.title,
-                self.display.width,
-                self.display.height,
+        self.debug_text = 'FPS({:.1f}) Elapsed({:.10f}) Actions({})'.format(#''Title({})Display({}, {}) FPS({:.1f}) Elapsed({:.1f}) Actions({})'.format(
+                #self.title,
+                #self.display.width,
+                #self.display.height,
                 self.clock.fps,
                 self.clock.elapsed,
                 self.action_queue)
         self.clock.tick()
-        self.display.refresh()
+        #self.display.refresh()
         
-        size = self.display.get_console_size()
-        self.display.set_console_size(size.x, size.y)
+        #size = self.display.get_console_size()
+        #self.display.set_console_size(size.x, size.y)
         
         # Draw Here
-        self.draw_sprites
+        #self.draw_sprites
         # Game Frame
-        self.display.render()
+        #self.display.render()
 
     def run(self):
         while self.running:
